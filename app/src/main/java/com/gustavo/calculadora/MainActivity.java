@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * Calculadora básica que permite suma, resta, división y multiplicación..
+ * @author Gustavo Alfonso
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,78 +22,73 @@ public class MainActivity extends AppCompatActivity {
     String operador;
 
     /**
-     *
+     * Metodo para realizar las operaciones cuando presionamos el igual.
      * @param igualView
      */
     public void onClickIgual (View igualView){
         TextView textV = (TextView) findViewById(R.id.campoNumero);
         numero2 = Double.parseDouble(textV.getText().toString());
 
-        if(operador.equals("+")){
-
-            resultado = numero1 + numero2;
-
-        } else if(operador.equals("-")){
-
-            resultado = numero1 - numero2;
-
-        }else if(operador.equals("/")){
-
-            resultado = numero1 / numero2;
-
-        }else if(operador.equals("*")){
-
-            resultado = numero1 * numero2;
+        switch (operador){
+            case "+":
+                resultado = numero1 + numero2;
+                break;
+            case "-":
+                resultado = numero1 - numero2;
+                break;
+            case "/":
+                resultado = numero1 / numero2;
+                break;
+            case "*":
+                resultado = numero1 * numero2;
+                break;
+            default:
+                break;
 
         }
 
         textV.setText(resultado.toString());
     }
 
+    /* Definimos las operaciones */
+
     public void onClickSuma(View sumView){
 
         TextView sView = (TextView) findViewById(R.id.campoNumero);
+        operador = "+";
+        onclickOperacionCapturaNumero1(sumView);
 
-        if(sView != null){
-
-            operador = "+";
-            onclickOperacionCapturaNumero1(sumView);
-        }
     }
 
     public void onClickRest(View restView){
 
         TextView rView = (TextView) findViewById(R.id.campoNumero);
+        operador = "-";
+        onclickOperacionCapturaNumero1(restView);
 
-        if(rView != null){
-
-            operador = "-";
-            onclickOperacionCapturaNumero1(restView);
-        }
     }
 
     public void onClickMulti(View multiView){
 
         TextView mView = (TextView) findViewById(R.id.campoNumero);
+        operador = "*";
+        onclickOperacionCapturaNumero1(multiView);
 
-        if(mView != null){
-
-            operador = "*";
-            onclickOperacionCapturaNumero1(multiView);
-        }
     }
 
     public void onClickDiv(View divView){
         TextView dView = (TextView) findViewById(R.id.campoNumero);
-
-        if(dView != null){
-
-            operador = "/";
-            onclickOperacionCapturaNumero1(divView);
-        }
-
+        operador = "/";
+        onclickOperacionCapturaNumero1(divView);
     }
 
+    /* Finalizamos de definir las operaciones */
+
+    /**
+     * Despues de elegir la operación asignamos el primer número elegido y esperamos a la introdución
+     * del segundo número.
+     * @param miView
+     */
     public void onclickOperacionCapturaNumero1(View miView){
 
         TextView captura1View = (TextView) findViewById(R.id.campoNumero);
@@ -97,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
         captura1View.setText("");
     }
 
+    /**
+     * Borra todos los números en pantalla.
+     * @param limpiaView
+     */
     public void onClickLimpia (View limpiaView){
 
         numero1 = 0.0;
@@ -104,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
         TextView tView = (TextView) findViewById(R.id.campoNumero);
         tView.setText("");
     }
+
+    /*Designamos todos los botones.*/
 
     public void onClickBtn1 (View btn1View){
 
@@ -170,4 +175,6 @@ public class MainActivity extends AppCompatActivity {
         TextView tView = (TextView) findViewById(R.id.campoNumero);
         tView.setText(tView.getText() + ".");
     }
+
+    /*Fin de la asignación de los botones.*/
 }
